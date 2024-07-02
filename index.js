@@ -3,14 +3,13 @@ const express = require("express");
 const app = express();
 const geoip = require("geoip-lite");
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const http = require("https");
 
-app.get(`/api/hello?:visitor_name`, async (req, res) => {
+app.get(`/api/hello?:visitor_name`, (req, res) => {
   const { visitor_name } = req.query;
   // get the ip adress
   const clientIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-
   const ip = clientIp.split(",")[0];
 
   // use geo to get details about the ip (city)
@@ -38,7 +37,7 @@ app.get(`/api/hello?:visitor_name`, async (req, res) => {
       response.on("end", function () {
         const body = Buffer.concat(chunks);
         const data = JSON.parse(body);
-        const getTemp = data?.current_observation?.condition?.temperature;
+        const getTemp = data.current_observation.condition.temperature;
 
         res.json({
           client_ip: ip,
