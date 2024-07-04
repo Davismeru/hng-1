@@ -23,7 +23,7 @@ app.get(`/api/hello?:visitor_name`, (req, res) => {
       port: null,
       path: `/weather?location=${getCity}&format=json&u=f`,
       headers: {
-        "x-rapidapi-key": "37660475bfmsh04f6579feda28b8p1b5fb5jsn95c614e25226",
+        "x-rapidapi-key": "a4fe04fc2cmsha68131baaac141cp108c73jsnecd6ec12b73e",
         "x-rapidapi-host": "yahoo-weather5.p.rapidapi.com",
       },
     },
@@ -37,7 +37,7 @@ app.get(`/api/hello?:visitor_name`, (req, res) => {
       response.on("end", function () {
         const body = Buffer.concat(chunks);
         const data = JSON.parse(body);
-        const getTemp = data.current_observation.condition.temperature;
+        const getTemp = Math.round((data.current_observation.condition.temperature-32)*5/9);;
 
         res.json({
           client_ip: ip, // The IP address of the requester
