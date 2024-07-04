@@ -37,7 +37,7 @@ app.get(`/api/hello?:visitor_name`, (req, res) => {
       response.on("end", function () {
         const body = Buffer.concat(chunks);
         const data = JSON.parse(body);
-        const getTemp = Math.round((data.current_observation.condition.temperature-32)*5/9);;
+        const getTemp = Math.round((data.current_observation.condition.temperature-32)*5/9);
 
         res.json({
           client_ip: ip, // The IP address of the requester
