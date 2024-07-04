@@ -40,9 +40,9 @@ app.get(`/api/hello?:visitor_name`, (req, res) => {
         const getTemp = data.current_observation.condition.temperature;
 
         res.json({
-          client_ip: ip,
-          location: getCity,
-          greeting: `Hello, ${visitor_name}, the temperature is ${getTemp} degrees Celcius in ${getCity}`,
+          client_ip: ip, // The IP address of the requester
+          location: getCity, // The city of the requester
+          greeting: `Hello, ${visitor_name.charAt(0).toUpperCase() + visitor_name.slice(1)}!, the temperature is ${getTemp} degrees Celcius in ${getCity}`,
         });
       });
     }
